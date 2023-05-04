@@ -3,18 +3,15 @@ ALX Projects Creator
 </h1>
 
 <p align="center">
- <a href="#project">About the Project</a> |
- <a href="#why">Why this repo?</a> |
- <a href="#why">ALX SE Programme</a> |
- <a href="#why">How to use it?</a> |
+ <a href="#about-the-project">About the Project</a> |
+ <a href="#why-this-repo?">Why this repo?</a> |
+ <a href="#alx-se-programme">ALX SE Programme</a> |
+ <a href="#how-to-use-it?">How to use it?</a> |
  <a href="#rocket-technologies">Technologies</a> |
  <a href="#how-to-contribute">How to contribute</a> |
  <a href="#memo-license">License</a>
 </p>
 
-<h1 align="center">
- <img src="https://unsplash.com/photos/hbb6GkG6p9M" alt="Demo">
-</h1>
 
 ## About the Project
 
@@ -59,7 +56,7 @@ This project is under the GPL-3.0 license. check the file [LICENSE](LICENSE) for
 ---
 
 <p align="center">
-This project was created by [Luis Saiete](https://twitter.com/ltsaiete). Find me on [LinkedIn](https://www.linkedin.com/in/ltsaiete/)
+This project was created by <a href="https://twitter.com/ltsaiete">Luis Saiete</a>. Find me on <a href="https://www.linkedin.com/in/ltsaiete/">LinkedIn</a>
 </p>
 
 <p align="center">
