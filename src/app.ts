@@ -86,5 +86,32 @@ dotenv.config();
 	// 	await newPag.goto(href);
 	// });
 
+	// Testing project data
+	const page2 = await browser.newPage();
+	await page2.goto(projectsLinks.pastProjects[0].href);
+	await page2.evaluate(() => {
+		const detailsPanel = document.querySelector(
+			'#project-description > .panel-body'
+		)?.children;
+		if (detailsPanel) {
+			const detailsPanelArr = [...detailsPanel];
+			let arr: any = [];
+			let aux: any = [];
+
+			detailsPanelArr.forEach((item, idx) => {
+				if (item.matches('h2') || item.matches('h3')) {
+					if (idx != 0) {
+						arr.push(aux);
+					}
+					aux = [];
+				}
+				aux.push(item);
+			});
+			arr.push(aux);
+
+			console.log(arr);
+		}
+	});
+
 	// await browser.close();
 })();
