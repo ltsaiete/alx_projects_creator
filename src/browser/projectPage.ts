@@ -11,9 +11,9 @@ export async function projectPage(browser: Browser, project: ProjectProps) {
 	const projectDetails = await page.evaluate(loadProjectDetails);
 	projectDetails.unshift(`# ${title}`);
 
-	
+	const projectFiles = await page.evaluate(loadProjectFiles);
 
-	console.log(projectDir);
+	console.log(projectFiles);
 }
 
 function loadProjectDir() {
@@ -29,6 +29,26 @@ function loadProjectDir() {
 	const dirName = dirNode?.querySelector('code');
 
 	return dirName ? dirName.innerText : '.';
+}
+
+function loadProjectFiles() {
+	const taskInfoNode = document.querySelectorAll('.task-card .list-group ul');
+
+	const fileNames: string[] = [];
+
+	taskInfoNode.forEach((infoNode) => {
+		const infoNodesArr = [...infoNode.children];
+
+		const filesNode = infoNodesArr.find((node) => {
+			const tagName = node.tagName.toLowerCase();
+			const innerHTML = node.innerHTML;
+			return tagName === 'li' && innerHTML.includes('File:');
+		});
+
+		const fileName = filesNode?.querySelector('code');
+		if (fileName) fileNames.push(fileName.innerText);
+	});
+	return fileNames;
 }
 
 function loadProjectDetails() {
