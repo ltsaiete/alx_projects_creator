@@ -6,9 +6,29 @@ export async function projectPage(browser: Browser, project: ProjectProps) {
 	const page = await browser.newPage();
 	await page.goto(href);
 
+	const projectDir = await page.evaluate(loadProjectDir);
+
 	const projectDetails = await page.evaluate(loadProjectDetails);
 	projectDetails.unshift(`# ${title}`);
-	console.log(projectDetails);
+
+	
+
+	console.log(projectDir);
+}
+
+function loadProjectDir() {
+	const taskInfoNode = document.querySelectorAll(
+		'.task-card .list-group ul'
+	)[0];
+	const infoNodesArr = [...taskInfoNode.children];
+	const dirNode = infoNodesArr.find((node) => {
+		const tagName = node.tagName.toLowerCase();
+		const innerHTML = node.innerHTML;
+		return tagName === 'li' && innerHTML.includes('Directory:');
+	});
+	const dirName = dirNode?.querySelector('code');
+
+	return dirName ? dirName.innerText : '.';
 }
 
 function loadProjectDetails() {
@@ -43,8 +63,6 @@ function loadProjectDetails() {
 	const detailsSectionsArr = detailsSections.reduce((previous, current) =>
 		previous.concat(current)
 	);
-
-	console.log(detailsSectionsArr);
 
 	let detailsMd = detailsSectionsArr.map((section) => {
 		const tagName = section.tagName.toLowerCase();

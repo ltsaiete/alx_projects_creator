@@ -4,8 +4,8 @@
 [x] Abrir os projectos actuais
 [x] Pegar o titulo do projecto
 [x] Tirar submenus desnecessarios
-[] Criar funcoes para lidar com cada tipo de  tag
-[] Converter cada elemento em MD e retornar
+[x] Criar funcoes para lidar com cada tipo de  tag
+[x] Converter cada elemento em MD e retornar
 []  Criar o Readme
 [] Criar o directorio com base no titulo
 [] Criar Readme
