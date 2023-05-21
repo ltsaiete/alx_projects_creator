@@ -6,21 +6,12 @@ export async function projectPage(browser: Browser, project: ProjectProps) {
 	const page = await browser.newPage();
 	await page.goto(href);
 
-	// await page.evaluate(loadProjectDetails);
+	const projectDetails = await page.evaluate(loadProjectDetails);
+	projectDetails.unshift(`# ${title}`);
+	console.log(projectDetails);
 }
 
 function loadProjectDetails() {
-	const tagHandlers = {
-		h2: handleH2
-		// 'h3': ,
-		// 'p': ,
-		// 'ul': ,
-	};
-
-	function handleH2(item: Element): string[] {
-		return [`## ${item.innerHTML}`];
-	}
-
 	const detailsPanel = document.querySelector(
 		'#project-description > .panel-body'
 	)?.children;
@@ -49,16 +40,37 @@ function loadProjectDetails() {
 		const tagName = section[0].tagName.toLowerCase();
 		return !excludedSections.includes(sectionTitle) && tagName == 'h2';
 	});
-	const detailsSectionsArr = detailsSections.reduce((previous, current) => {
-		return previous.concat(current);
-	});
+	const detailsSectionsArr = detailsSections.reduce((previous, current) =>
+		previous.concat(current)
+	);
 
 	console.log(detailsSectionsArr);
 
-	// const detailsMd = [];
-	// detailsSectionsArr.forEach((section) => {
-	// 	const tagName = section.tagName.toLowerCase();
-	// 	const tagMd = tagHandlers['h2'](section);
-	// 	console.log(tagMd);
-	// });
+	let detailsMd = detailsSectionsArr.map((section) => {
+		const tagName = section.tagName.toLowerCase();
+		switch (tagName) {
+			case 'h2':
+				return [`## ${section.innerHTML}`];
+				break;
+			case 'h3':
+				return [`### ${section.innerHTML}`];
+				break;
+			case 'p':
+				return [section.innerHTML];
+				break;
+			case 'ul':
+				const lis = section.querySelectorAll('li');
+				const liMd: string[] = [];
+				lis.forEach((li) => {
+					liMd.push(`- ${li.innerHTML}`);
+				});
+				return liMd;
+				break;
+			default:
+				return [section.innerHTML];
+				break;
+		}
+	});
+
+	return detailsMd.reduce((previous, current) => previous.concat(current));
 }
