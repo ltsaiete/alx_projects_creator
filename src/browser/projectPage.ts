@@ -1,5 +1,6 @@
 import { Browser } from 'puppeteer';
 import { ProjectProps } from './types';
+import { createFiles } from '../files';
 
 export async function projectPage(browser: Browser, project: ProjectProps) {
 	const { href, title } = project;
@@ -12,8 +13,13 @@ export async function projectPage(browser: Browser, project: ProjectProps) {
 	projectDetails.unshift(`# ${title}`);
 
 	const projectFiles = await page.evaluate(loadProjectFiles);
-
-	console.log(projectFiles);
+	
+	createFiles({
+		title,
+		dir: projectDir,
+		details: projectDetails,
+		filenames: projectFiles
+	});
 }
 
 function loadProjectDir() {
@@ -28,7 +34,7 @@ function loadProjectDir() {
 	});
 	const dirName = dirNode?.querySelector('code');
 
-	return dirName ? dirName.innerText : '.';
+	return dirName ? dirName.innerText : 'unknown';
 }
 
 function loadProjectFiles() {
