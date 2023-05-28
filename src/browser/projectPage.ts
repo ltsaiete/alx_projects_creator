@@ -5,7 +5,7 @@ import { createFiles } from '../files';
 export async function projectPage(browser: Browser, project: ProjectProps) {
 	const { href, title } = project;
 	const page = await browser.newPage();
-	await page.goto(href);
+	await page.goto(href, { timeout: 0 });
 	let projectDir = '';
 
 	try {

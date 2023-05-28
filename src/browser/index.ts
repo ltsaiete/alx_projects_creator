@@ -10,10 +10,9 @@ export default async function start(browser: Browser) {
 	);
 
 	// Browse trough current projects
-	// projects.current.forEach(async (project) => {
-	// 	await projectPage(browser, project);
-	// });
-		await projectPage(browser, projects.current[4]);
+	projects.current.forEach(async (project) => {
+		await projectPage(browser, project);
+	});
 
 	// projectsLinks.forEach(async ({ href }) => {
 	// 	const newPag = await browser.newPage();

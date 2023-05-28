@@ -4,9 +4,12 @@ import start from './browser';
 dotenv.config();
 
 (async () => {
-	const browser = await puppeteer.launch({ headless: false });
+	const browser = await puppeteer.launch({ headless: 'new' });
 	console.log('Starting browser...');
-	await start(browser);
-	console.log('Closing the browser.');
-	// await browser.close();
+	try {
+		await start(browser);
+	} finally {
+		console.log('Hit ^C to stop the tool.');
+		// await browser.close();
+	}
 })();
