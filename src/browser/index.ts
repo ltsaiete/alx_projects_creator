@@ -13,7 +13,8 @@ export default async function start(browser: Browser) {
 	// projects.current.forEach(async (project) => {
 	// 	await projectPage(browser, project);
 	// });
-	await projectPage(browser, projects.current[0]);
+		await projectPage(browser, projects.current[4]);
+
 	// projectsLinks.forEach(async ({ href }) => {
 	// 	const newPag = await browser.newPage();
 	// 	await newPag.goto(href);

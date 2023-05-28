@@ -13,8 +13,8 @@ export function createFiles({
 	details,
 	filenames
 }: CreateFilesProps) {
+	console.log('Creating files for project ' + title);
 	const basePath = resolve(__dirname, '..', '..', 'output', dir);
-	// fs.mkdirSync(basePath, { recursive: true });
 
 	writeFile(join(basePath, 'README.md').replace(' ', ''), details.join('\n'));
 

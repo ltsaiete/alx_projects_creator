@@ -6,20 +6,28 @@ export async function projectPage(browser: Browser, project: ProjectProps) {
 	const { href, title } = project;
 	const page = await browser.newPage();
 	await page.goto(href);
+	let projectDir = '';
 
-	const projectDir = await page.evaluate(loadProjectDir);
+	try {
+		projectDir = await page.evaluate(loadProjectDir);
+	} catch (error) {
+		console.log('Failed to load project ' + title);
+		page.close();
+		return;
+	}
 
 	const projectDetails = await page.evaluate(loadProjectDetails);
 	projectDetails.unshift(`# ${title}`);
 
 	const projectFiles = await page.evaluate(loadProjectFiles);
-	
+
 	createFiles({
 		title,
 		dir: projectDir,
 		details: projectDetails,
 		filenames: projectFiles
 	});
+	page.close();
 }
 
 function loadProjectDir() {
