@@ -2,10 +2,6 @@ import { Browser } from 'puppeteer';
 import { homepage } from './homepage';
 import { projectPage } from './projectPage';
 
-async function createPage(browser: Browser) {
-	return await browser.newPage();
-}
-
 export default async function start(browser: Browser) {
 	const projects = await homepage(browser);
 	console.log('Current projects will be loaded automatically...');
@@ -14,9 +10,10 @@ export default async function start(browser: Browser) {
 	);
 
 	// Browse trough current projects
-	projects.current.forEach(async (project) => {
-		await projectPage(browser, project);
-	});
+	// projects.current.forEach(async (project) => {
+	// 	await projectPage(browser, project);
+	// });
+	await projectPage(browser, projects.current[0]);
 	// projectsLinks.forEach(async ({ href }) => {
 	// 	const newPag = await browser.newPage();
 	// 	await newPag.goto(href);

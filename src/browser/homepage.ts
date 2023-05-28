@@ -5,7 +5,7 @@ export async function homepage(browser: Browser): Promise<ProjectsProps> {
 	const page = await browser.newPage();
 
 	// Login to ALX
-	await page.goto('https://intranet.alxswe.com/auth/sign_in');
+	await page.goto('https://intranet.alxswe.com/auth/sign_in', { timeout: 0 });
 	await page.type(
 		'#user_email',
 		process.env.USER_EMAIL ? process.env.USER_EMAIL : ''

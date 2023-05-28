@@ -14,16 +14,32 @@ export function createFiles({
 	filenames
 }: CreateFilesProps) {
 	const basePath = resolve(__dirname, '..', '..', 'output', dir);
-	fs.mkdirSync(basePath, { recursive: true });
-	writeFile(join(basePath, 'README.md'), details.join('\n'));
+	// fs.mkdirSync(basePath, { recursive: true });
+
+	writeFile(join(basePath, 'README.md').replace(' ', ''), details.join('\n'));
+
+	const separatedFiles = filenames.map((file) => {
+		return file.split(',');
+	});
+
+	separatedFiles.forEach((files) => {
+		files.forEach((filename) => {
+			writeFile(join(basePath, filename).replace(' ', ''), '');
+		});
+	});
 }
 
 function writeFile(pathname: string, content: string) {
-	fs.writeFile(pathname, content, (err) => {
-		if (err) {
-			console.error('Error writing to file:', err);
-		} else {
-			console.log('Content has been written to file.');
-		}
-	});
+	// Find directory path
+	const filenameIndex = Math.max(
+		pathname.lastIndexOf('\\'),
+		pathname.lastIndexOf('/')
+	);
+	const dir = pathname.substring(0, filenameIndex);
+	// Create directory if not exists
+	if (!fs.existsSync(dir)) {
+		fs.mkdirSync(dir, { recursive: true });
+	}
+
+	fs.writeFile(pathname, content, (err) => {});
 }
