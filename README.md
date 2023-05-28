@@ -12,7 +12,6 @@ ALX Projects Creator
  <a href="#memo-license">License</a>
 </p>
 
-
 ## About the Project
 
 This project uses web scraping to navigate trough the ALX Intranet and gather information to create the directory and files all the current projects at the ALX SE Programme.
@@ -33,6 +32,7 @@ I used these technologies to build this project:
 - [Puppeteer](https://pptr.dev/)
 
 ## How to use it?
+
 - Download or clone this repo: `git clone https://github.com/ltsaiete/alx_project_creator`
 - Install the dependencies: `npm i`
 - Create a `.env` file based on the `.env.example` and add your credentials
