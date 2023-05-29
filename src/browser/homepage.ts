@@ -21,7 +21,7 @@ export async function homepage(browser: Browser): Promise<ProjectsProps> {
 
 	const current = await page.evaluate((): ProjectProps[] => {
 		// Load current projects
-		const projectsPanel = document.querySelectorAll('.panel-default')[2];
+		const projectsPanel = document.querySelectorAll('.panel-default')[1];
 		const projectsAnchors = projectsPanel.querySelectorAll('a');
 		const projectsArr = [...projectsAnchors];
 
