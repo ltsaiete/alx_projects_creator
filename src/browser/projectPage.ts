@@ -31,9 +31,7 @@ export async function projectPage(browser: Browser, project: ProjectProps) {
 }
 
 function loadProjectDir() {
-	const taskInfoNode = document.querySelectorAll(
-		'.task-card .list-group ul'
-	)[0];
+	const taskInfoNode = document.querySelectorAll('.task-card .list-group ul')[0];
 	const infoNodesArr = [...taskInfoNode.children];
 	const dirNode = infoNodesArr.find((node) => {
 		const tagName = node.tagName.toLowerCase();
@@ -66,9 +64,7 @@ function loadProjectFiles() {
 }
 
 function loadProjectDetails() {
-	const detailsPanel = document.querySelector(
-		'#project-description > .panel-body'
-	)?.children;
+	const detailsPanel = document.querySelector('#project-description > .panel-body')?.children;
 
 	if (!detailsPanel) return [];
 
@@ -94,9 +90,7 @@ function loadProjectDetails() {
 		const tagName = section[0].tagName.toLowerCase();
 		return !excludedSections.includes(sectionTitle) && tagName == 'h2';
 	});
-	const detailsSectionsArr = detailsSections.reduce((previous, current) =>
-		previous.concat(current)
-	);
+	const detailsSectionsArr = detailsSections.reduce((previous, current) => previous.concat(current), []);
 
 	let detailsMd = detailsSectionsArr.map((section) => {
 		const tagName = section.tagName.toLowerCase();
@@ -124,5 +118,5 @@ function loadProjectDetails() {
 		}
 	});
 
-	return detailsMd.reduce((previous, current) => previous.concat(current));
+	return detailsMd.reduce((previous, current) => previous.concat(current), []);
 }
